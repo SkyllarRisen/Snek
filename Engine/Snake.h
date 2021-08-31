@@ -19,7 +19,7 @@ public:
     bool MoveHead(const VecInt2D& moveCache);
     void Grow();
     void Draw() const;
-    void Eat(Cookie& cookie);
+    bool Eat(Cookie& cookie);
 
     //Members
 

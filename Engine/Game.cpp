@@ -35,7 +35,7 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	brd(gfx),
 	snek(brd,{ 5,(brd.Height() - 1) / 2 }, Vectors::eX),
-	obs(brd.Height(),Obstacle(brd, snek.Pos())),
+	obs(1, Obstacle(brd, snek.Pos(), snek.Vel(), snekFood.Pos())),
 	snekFood(brd),
 	moveCache(Vectors::eX)
 {
@@ -72,12 +72,23 @@ void Game::UpdateModel()
 		if (snek.MoveHead(moveCache))
 			fGameEnd = true;
 			
-		snek.Eat(snekFood);			
+		if(snek.Eat(snekFood))
+			++snekEatCounter;
 		snekMoveCounter = 0;
 	}
 	else
 		++snekMoveCounter;
-
+	if (snekEatCounter >= 3)
+	{
+		if (level < brd.Height())
+		{
+			obs.push_back(Obstacle(brd, snek.Pos(), snek.Vel(), snekFood.Pos()));
+			++level;
+		}
+		
+		snekEatCounter = 0;
+	}
+		
 
 }
 

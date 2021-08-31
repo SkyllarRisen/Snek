@@ -49,10 +49,13 @@ private:
 	/*  User Variables              */
 	Board brd;
 	Snake snek;
-	std::vector<Obstacle> obs;
+	
 	Cookie snekFood;
+	std::vector<Obstacle> obs;
 	static constexpr int snekMoveTime = 144/6;
 	int snekMoveCounter = 0;
+	int snekEatCounter = 0;
+	int level = 0;
 	VecInt2D moveCache;
 	bool fGameEnd = false;
 	/********************************/

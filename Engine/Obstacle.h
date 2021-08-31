@@ -10,7 +10,7 @@ class Obstacle : public Entity
 {
 public:
     Obstacle(const Obstacle& o);
-    Obstacle(Board& board, const VecInt2D& snekPos);
+    Obstacle(Board& board, const VecInt2D& snekPos, const VecInt2D& snekVel, const VecInt2D& foodPos);
     void Draw() const;
 
 private:
@@ -22,5 +22,7 @@ private:
     Board& board;
     Color c;
     VecInt2D snekPos;
+    VecInt2D snekVel;
+    VecInt2D foodPos;
 };
 

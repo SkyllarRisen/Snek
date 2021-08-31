@@ -62,13 +62,15 @@ void Snake::Draw() const
         SnakeSegments.at(i).Draw(board, Vel());
 }
 
-void Snake::Eat(Cookie& cookie)
+bool Snake::Eat(Cookie& cookie)
 {
     if (cookie.Pos() == Pos())
     {
         cookie.Spawn();
         Grow();
+        return true;
     }
+    return false;
 }
 
 Snake::Segment::Segment(VecInt2D pos, bool evenNumberSegment, bool fHead)
