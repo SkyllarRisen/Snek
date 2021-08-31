@@ -15,9 +15,9 @@ public:
     void Draw();
     int Width() const;
     int Height() const;
-    void ResetTiles();
-    void setTileOccupied(VecInt2D& gridPos);
-    std::vector<VecInt2D> GetOccupiedTiles() const;
+    void ResetTile(const VecInt2D& gridPos);
+    void setTileOccupied(const VecInt2D& gridPos);
+    bool TileIsOccupied(const VecInt2D& gridPos) const;
 
 private:
 
@@ -25,6 +25,6 @@ private:
     const VecInt2D boardDim;
     Graphics& gfx;
     const VecInt2D borderWidth = {2,2};
-    std::vector<VecInt2D> isOccupied;
+    std::vector<bool> isOccupied;
     
 };

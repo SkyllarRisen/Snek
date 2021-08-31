@@ -22,21 +22,10 @@ void Cookie::Draw() const
 
 void Cookie::Spawn()
 {
-    bool isOccupied = true;
-    VecInt2D tmpVec;
-    while (isOccupied)
+    VecInt2D tmpVec = { xDistr(gen), yDistr(gen) };
+    while (board.TileIsOccupied(tmpVec))
     {
-        isOccupied = false;
-        tmpVec = { xDistr(gen), yDistr(gen) };
-        for (int i = 0; i < board.GetOccupiedTiles().size(); ++i)
-        {
-            if (board.GetOccupiedTiles().at(i) == tmpVec)
-            {
-                isOccupied = true;
-                break;
-            }
-                
-        }
+        tmpVec = { xDistr(gen), yDistr(gen) };            
     }
     Pos(tmpVec);
 }

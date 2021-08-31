@@ -6,7 +6,8 @@ Board::Board(Graphics& gfx)
     :
     Entity({0,0}, {0,0}),
     gfx(gfx),
-    boardDim({ 16*2,9*2 })
+    boardDim({ 16*2,9*2 }),
+    isOccupied(boardDim.x * boardDim.y, false)
 
 {
     VecInt2D screenDim(Graphics::ScreenWidth, Graphics::ScreenHeight);
@@ -34,18 +35,18 @@ int Board::Height() const
     return boardDim.y;
 }
 
-void Board::ResetTiles()
+void Board::ResetTile(const VecInt2D& gridPos)
 {
-    isOccupied.clear();
+    isOccupied.at(gridPos.y * boardDim.x + gridPos.x) = false;
 }
 
-void Board::setTileOccupied(VecInt2D& gridPos)
+void Board::setTileOccupied(const VecInt2D& gridPos)
 {
-    isOccupied.push_back(gridPos);
+    isOccupied.at(gridPos.y * boardDim.x + gridPos.x) = true;
 }
 
-std::vector<VecInt2D> Board::GetOccupiedTiles() const
+bool Board::TileIsOccupied(const VecInt2D& gridPos) const
 {
-    return isOccupied;
+    return isOccupied.at(gridPos.y * boardDim.x + gridPos.x);
 }
 

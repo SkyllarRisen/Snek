@@ -22,7 +22,11 @@ Snake::Snake(Board& board, VecInt2D pos, VecInt2D initVel)
 bool Snake::MoveHead(const VecInt2D& moveCache)
 {
     Vel(moveCache);
-    board.ResetTiles();
+    for (Segment& s : SnakeSegments)
+    {
+        board.ResetTile(s.Pos());
+    }
+    
     for (int i = SnakeSegments.size() - 1;i>0;--i)
     {
         SnakeSegments.at(i).Follow(SnakeSegments.at(i - 1));
