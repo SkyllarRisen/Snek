@@ -21,6 +21,7 @@ Snake::Snake(Board& board, VecInt2D pos, VecInt2D initVel)
 
 bool Snake::MoveHead(const VecInt2D& moveCache)
 {
+    bool abortFlag = false;
     Vel(moveCache);
     for (Segment& s : SnakeSegments)
     {
@@ -32,14 +33,17 @@ bool Snake::MoveHead(const VecInt2D& moveCache)
         SnakeSegments.at(i).Follow(SnakeSegments.at(i - 1));
         board.setTileOccupied(SnakeSegments.at(i-1).Pos());
     }
+    
     SnakeSegments.at(0).MoveHead(Vel(), board);
     Pos(SnakeSegments.at(0).Pos());
-    for (int i = 1; i < SnakeSegments.size(); ++i)
+    if (board.TileIsOccupied(Pos()))
     {
-        if (Pos() == SnakeSegments.at(i).Pos())
-            return false;
+        abortFlag = true;
     }
-    return true;
+
+    board.setTileOccupied(Pos());
+    
+    return abortFlag;
 }
 
 void Snake::Grow()
@@ -89,7 +93,7 @@ void Snake::Segment::MoveHead(const VecInt2D dir, Board& board)
     assert(abs(dir.x) + abs(dir.y) == 1);
     pos += dir;
     Clamp(board);
-    board.setTileOccupied(pos);
+    
     
 }
 

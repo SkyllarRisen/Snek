@@ -12,7 +12,8 @@ public:
 
     Board::Board(Graphics& gfx);
     void Draw(const Sprite& sprite, const VecInt2D& gridPos = { 0,0 }, const Color c = Colors::White, const VecInt2D& velVec = -Vectors::eY) const;
-    void Draw();
+    void Draw() const;
+    void DrawRect(const VecInt2D& pos, const Color c) const;
     int Width() const;
     int Height() const;
     void ResetTile(const VecInt2D& gridPos);

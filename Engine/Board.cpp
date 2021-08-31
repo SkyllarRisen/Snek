@@ -19,10 +19,29 @@ void Board::Draw(const Sprite& sprite, const VecInt2D& gridPos, const Color c, c
     gfx.DrawSprite(sprite.getSprite(velVec), Pos() + gridPos*tileDim, c);
 }
 
-void Board::Draw()
+void Board::Draw() const
 {
     gfx.DrawRectDim(Pos().x - borderWidth.x, Pos().y - borderWidth.y, Width()*tileDim + borderWidth.x * 2, Height()*tileDim + borderWidth.y * 2, Colors::White);
     gfx.DrawRectDim(Pos().x, Pos().y, Width()*tileDim, Height()*tileDim, Colors::Black);
+    //for (int i = 0; i<isOccupied.size();++i)
+    //{
+    //    if (isOccupied.at(i))
+    //    {
+    //        VecInt2D gridPos = { i % boardDim.x,i / boardDim.x };
+    //        DrawRect(gridPos, Colors::Red);
+    //    }
+    //    else
+    //    {
+    //        VecInt2D gridPos = { i % boardDim.x,i / boardDim.x };
+    //        DrawRect(gridPos, Colors::Blue);
+    //    }
+    //}
+}
+
+void Board::DrawRect(const VecInt2D& pos, const Color c) const
+{
+    VecInt2D tileVec = Pos() + pos * tileDim;
+    gfx.DrawRectDim(tileVec.x, tileVec.y, tileDim, tileDim, c);
 }
 
 int Board::Width() const

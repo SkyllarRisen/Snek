@@ -76,3 +76,8 @@ bool VecInt2D::operator==(const VecInt2D& v)
 {
     return x == v.x && y == v.y;
 }
+
+bool VecInt2D::operator!=(const VecInt2D& v)
+{
+    return !(*this==v);
+}

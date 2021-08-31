@@ -26,6 +26,7 @@
 #include "Snake.h"
 #include "Graphics.h"
 #include "Cookie.h"
+#include "Obstacle.h"
 
 class Game
 {
@@ -48,6 +49,7 @@ private:
 	/*  User Variables              */
 	Board brd;
 	Snake snek;
+	std::vector<Obstacle> obs;
 	Cookie snekFood;
 	static constexpr int snekMoveTime = 144/6;
 	int snekMoveCounter = 0;

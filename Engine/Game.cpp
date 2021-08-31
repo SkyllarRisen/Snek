@@ -35,10 +35,10 @@ Game::Game( MainWindow& wnd )
 	gfx( wnd ),
 	brd(gfx),
 	snek(brd,{ 5,(brd.Height() - 1) / 2 }, Vectors::eX),
+	obs(brd.Height(),Obstacle(brd, snek.Pos())),
 	snekFood(brd),
 	moveCache(Vectors::eX)
 {
-
 }
 
 void Game::Go()
@@ -69,7 +69,7 @@ void Game::UpdateModel()
 
 	if (snekMoveCounter >= snekMoveTime)
 	{
-		if (!snek.MoveHead(moveCache))
+		if (snek.MoveHead(moveCache))
 			fGameEnd = true;
 			
 		snek.Eat(snekFood);			
@@ -84,6 +84,10 @@ void Game::UpdateModel()
 void Game::ComposeFrame()
 {
 	brd.Draw();
+	for (Obstacle& o : obs)
+	{
+		o.Draw();
+	}
 	snekFood.Draw();
 	snek.Draw();
 	if (fGameEnd)

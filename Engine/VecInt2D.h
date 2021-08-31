@@ -22,7 +22,7 @@ public:
     VecInt2D operator-() const;
 
     bool operator == (const VecInt2D& v);
-
+    bool operator != (const VecInt2D& v);
 };
 
 namespace Vectors
